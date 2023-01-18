@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 
 module.exports = {
   getData: async () => {
@@ -14,18 +14,18 @@ module.exports = {
     const mapArray = promisesArray.map((element) => {
       const datosPoke = element.data;
       const objPokemon = {
-        ID: datosPoke.id.toString(),
-        Name: datosPoke.name,
-        Vida: datosPoke.stats[0].base_stat,
-        Ataque: datosPoke.stats[1].base_stat,
-        Defensa: datosPoke.stats[2].base_stat,
-        Velocidad: datosPoke.stats[5].base_stat,
-        Altura: datosPoke.height,
-        Peso: datosPoke.weight,
-        Imagen: datosPoke.sprites.other["dream_world"].front_default,
-        Imagen2: datosPoke.sprites.other["official-artwork"].front_default,
-        Imagen3: datosPoke.sprites.other["home"].front_default,
-        tipo: datosPoke.types.map((element) => {
+        id: datosPoke.id.toString(),
+        name: datosPoke.name,
+        health: datosPoke.stats[0].base_stat,
+        attack: datosPoke.stats[1].base_stat,
+        defense: datosPoke.stats[2].base_stat,
+        speed: datosPoke.stats[5].base_stat,
+        height: datosPoke.height,
+        weight: datosPoke.weight,
+        image: datosPoke.sprites.other["dream_world"].front_default,
+        image2: datosPoke.sprites.other["official-artwork"].front_default,
+        image3: datosPoke.sprites.other["home"].front_default,
+        type: datosPoke.types.map((element) => {
           return { name: element.type.name };
         }),
       };
