@@ -16,7 +16,7 @@ module.exports = {
       const objPokemon = {
         id: datosPoke.id.toString(),
         name: datosPoke.name,
-        health: datosPoke.stats[0].base_stat,
+        hp: datosPoke.stats[0].base_stat,
         attack: datosPoke.stats[1].base_stat,
         defense: datosPoke.stats[2].base_stat,
         speed: datosPoke.stats[5].base_stat,
@@ -33,7 +33,12 @@ module.exports = {
     });
     return mapArray;
   },
+  getId: (alls, id) => {
+    const res = alls.filter(element => element.id == id);
+    return res;
+  },
 };
+
 
 //{
 //   getData: async () => {
