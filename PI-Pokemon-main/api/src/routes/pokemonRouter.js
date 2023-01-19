@@ -2,33 +2,42 @@ const { Router } = require('express');
 const { getData, getId } = require('../controllers/pokemonController');
 const router = Router();
 const { default: axios } = require('axios');
-const {Pokemon, Type} = require('../db.js');
+const { Pokemon } = require('../db.js');
 
 
 router.get('/', async (req, res) => {
 
+  const { name } = req.query;
   const getApi = await getData();
-  
-  const { name } = req.query; //traigo valor name para la query
-  
-  if(!name){ //si no hay name traigo la API
-    return res.send(getApi);
-  }
 
-  if(name){
-    const queryFilter = getApi.filter((element) => 
-      element.name.toLowerCase() === name.toLowerCase()
-    )
-    //console.log(name)
-    return res.status(200).send(queryFilter);
+
+
+  if (!name) {
+      return res.status(200).send(getApi)
   }
- });
+  if (name) {
+      const pokemonsInDb = await Pokemon.findAll({where:{name:name}})
+      const filterDatabase = getApi.filter((element) =>
+      element.name.toLowerCase() === name.toLowerCase());
+      if(pokemonsInDb.length<=0){
+          return res.send(filterDatabase)}
+          else{
+      return res.send(pokemonsInDb)}
+
+  }
+});
+
   router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const idData = await getData();
     const pokeId = getId(idData, id)
+   
     
     try{
+      if(id.length>10){
+        const pokemonsIdinDb = await Pokemon.findAll({where: {id:id}})
+        return res.send(pokemonsIdinDb);
+      }
       if(pokeId.length) res.status(200).send(pokeId);
       else throw new Error ('There is no pokemon with that id')
     } catch (error) {
