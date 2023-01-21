@@ -11,13 +11,11 @@ const rootReducer = (state = initialState, actions) => {
             }else{
                 return {...state, error: true}
             }
-            break;
         case GET_POKEMONS_BY_ID:
             if(!actions.payload.includes(null)){
                 return {...state, pokemonDetails: actions.payload}
             }
-        default:
-            break;
+        default: return {...state};
     }
 }
 

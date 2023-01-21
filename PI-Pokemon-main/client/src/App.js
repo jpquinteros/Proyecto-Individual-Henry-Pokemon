@@ -1,18 +1,20 @@
 import './App.css';
-import Homepage from './components/home';
-import { Route } from 'react-router-dom';
+import Home from './components/home';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from "react-redux"
+import store from './redux/store';
+
 
 function App() {
-  return (
-    <div className="App">
-      <Route exact path = '/'>
-        App
-      </Route>
-      <Route exact path = '/home'>
-        <Homepage></Homepage>
-      </Route>
-    </div>
-  );
+  return(
+    <BrowserRouter>
+    <Switch>
+      <Provider store = {store}>
+        <Route exact path="/home" component={Home} />
+      </Provider>
+    </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App;

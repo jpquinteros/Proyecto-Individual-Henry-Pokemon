@@ -3,21 +3,19 @@ import { useState, useEffect } from "react";
 import getAllPokemons from "../redux/actions";
 
 
-const Homepage = () => {
+const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const getPokemons = getAllPokemons()
     return (
-        <div>{getAllPokemons.map((pokemon) => {
-            return (<ul>
-                <li> 
-                    id= {pokemon.id}
-                </li>
-                <li>
-                    name= {pokemon.name}
-                </li>
-                </ul>
-            )
-        })}</div>
+        <div>
+            <h1>
+                {getPokemons.map((elemento) => {
+                    return elemento.name
+                 }
+                )}
+            </h1>
+        </div>
     )
 }
 
-export default Homepage;
+export default Home;
