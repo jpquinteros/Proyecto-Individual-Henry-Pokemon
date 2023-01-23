@@ -64,11 +64,9 @@ export default function Home(){
                 {!allPokemons.length?<div><h1>Pokemons not found</h1></div>:
                    allPokemons.map((e) =>{
                     return (
-                        <fragment>
                             <Link to={'/home/'}>
                                 <Card key={e.id} name={e.name} image={e.image} type={e.type} />
-                            </Link>
-                        </fragment>
+                            </Link>    
                     )
                 })
 
