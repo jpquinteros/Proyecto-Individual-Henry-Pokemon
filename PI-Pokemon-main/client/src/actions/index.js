@@ -17,18 +17,18 @@ export function getAllPokemons(){
     })
   }
 
-
-
-  // return function (dispatch) {
-  //   fetch("http://localhost:3001/pokemons")
-  //     .then((response) => response.json())
-  //     .then((data) => dispatch({ type: GET_ALL_POKEMONS, payload: data.results}));
-  // };
 }
 
 export function pruebaAction(){
   return {type: 'LO_QUE_SEA',
           payload: 7}
+}
+
+export function filterPokemonsByType(payload){
+  return {
+    type: GET_POKEMONS_BY_TYPE,
+    payload
+  }
 }
 
 

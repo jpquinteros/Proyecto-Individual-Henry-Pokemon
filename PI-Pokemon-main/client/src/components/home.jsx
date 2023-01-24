@@ -1,16 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllPokemons } from "../actions";
+import { getAllPokemons, filterPokemonsByType } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import { pruebaAction } from "../actions";
+import Paginado from "./Paginado";
 
 export default function Home(){
     const dispatch = useDispatch()
     const allPokemons = useSelector((state) => state.pokemons);
-    console.log(allPokemons)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
+    const indexOfLastPokemon = currentPage * pokemonsPerPage;
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+    const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
     
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
+
     useEffect (()=>{
         dispatch(getAllPokemons());
 
@@ -19,6 +28,10 @@ export default function Home(){
     function handlerClick(e){
         e.preventDefault();
         dispatch(getAllPokemons);
+    }
+
+    function handleFilterStatus(e){
+        dispatch(filterPokemonsByType(e.target.value))
     }
 
     return (
@@ -33,7 +46,7 @@ export default function Home(){
                     <option value='asc'>Ascending</option>
                     <option value='desc'>Descending</option>
                 </select>
-                <select>
+                <select onChange={e => handleFilterStatus(e)}>
                     <option value='All'>All</option>
                     <option value='normal'>Normal</option>
                     <option value='fighting'>Fighting</option>
@@ -61,8 +74,12 @@ export default function Home(){
                     <option value='api'>Original Pokemons</option>
                     <option value='created'>Created</option>
                 </select>
-                {!allPokemons.length?<div><h1>Pokemons not found</h1></div>:
-                   allPokemons.map((e) =>{
+                <Paginado
+                pokemonsPerPage={pokemonsPerPage}
+                allPokemons={allPokemons.length}
+                paginado = {paginado}
+                />
+                { currentPokemons?.map((e) =>{
                     return (
                             <Link to={'/home/'}>
                                 <Card key={e.id} name={e.name} image={e.image} type={e.type} />
@@ -78,24 +95,3 @@ export default function Home(){
 
 }
 
-
-// const Home = () => {
-//     const [currentPage, setCurrentPage] = useState(1);
-//     const getPokemons = getAllPokemons()
-//     return (
-//         <div>
-//             <h1>
-//                 {getPokemons.map((elemento) => {
-//                     return (
-//                         <div>
-//                             {elemento.name}
-//                         </div>
-//                     )
-//                  }
-//                 )}
-//             </h1>
-//         </div>
-//     )
-// }
-
-// export default Home;
