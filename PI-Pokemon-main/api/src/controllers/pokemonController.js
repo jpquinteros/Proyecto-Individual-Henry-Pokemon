@@ -40,22 +40,3 @@ module.exports = {
 };
 
 
-//{
-//   getData: async () => {
-//     const getPokemons = await axios.get(
-//       "https://pokeapi.co/api/v2/pokemon?offset=0&limit=150"
-//     );
-//     const pokemap = getPokemons.data.results.map((element) => {
-//       axios.get(element.url);
-//     });
-//     const getUrl = await axios.all(pokemap);
-//     const mapurl = getUrl.map((element) => {
-//         const poke = element.data;
-//         const obj = {
-//             id: poke.id.toString()
-//         }
-//         return obj;
-//     });
-//     return getPokemons;
-//   },
-// };
