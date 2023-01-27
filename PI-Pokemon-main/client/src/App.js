@@ -1,22 +1,24 @@
 import './App.css';
-import Home from './components/Home';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Provider } from "react-redux"
-import { store } from './store'
-import  LandingPage  from './components/LandingPage'
+import {Route} from 'react-router-dom';
+import { LandingPage } from './components/LandingPage/LandingPage';
+import { Home } from './components/Home/Home';
+import CreateForm from './components/CreatePokemon/CreatePokemon';
 
 
 function App() {
-  return(
-    <BrowserRouter>
-    <div className='App'>
-      <Switch>
-        <Route exact path= '/' component = {LandingPage} />
-        <Route exact path= '/home' component = {Home} />
-      </Switch>
+  return (
+  
+    <div>
+      <Route exact path={'/'}>
+        <LandingPage />
+      </Route>
+      <Route exact path={'/home'}>
+        <Home />
+      </Route>
+      <Route exact path={'/create'} component={CreateForm}/>
     </div>
-    </BrowserRouter>
-  )
+  
+  );
 }
 
 export default App;

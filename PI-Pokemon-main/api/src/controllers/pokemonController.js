@@ -1,4 +1,5 @@
 const axios = require('axios');
+const {Pokemon, Type} = require('../db')
 
 module.exports = {
   getData: async () => {
@@ -8,9 +9,8 @@ module.exports = {
     const pokeArray = data.results.map(
       async (element) => await axios(element.url)
     );
-    const promisesArray = await axios
-      .all(pokeArray)
-      .catch((error) => console.log(error));
+    const promisesArray = await axios.all(pokeArray)
+    const dataBase = await Pokemon.findAll({include: Type})
     const mapArray = promisesArray.map((element) => {
       const datosPoke = element.data;
       const objPokemon = {
@@ -31,7 +31,7 @@ module.exports = {
       };
       return objPokemon;
     });
-    return mapArray;
+    return mapArray.concat(dataBase);
   },
   getId: (alls, id) => {
     const res = alls.filter(element => element.id == id);

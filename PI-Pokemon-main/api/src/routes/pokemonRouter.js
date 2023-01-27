@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { getData, getId } = require('../controllers/pokemonController');
 const router = Router();
 const { default: axios } = require('axios');
-const { Pokemon } = require('../db.js');
+const { Pokemon, Type } = require('../db.js');
 
 
 router.get('/', async (req, res) => {
@@ -46,27 +46,39 @@ router.get('/', async (req, res) => {
   })
 
   router.post('/', async (req, res) => {
-    console.log("estoy en post");
+    const { hp, attack, defense, speed, height, weight,image,type1, type2 } = req.body;
+    const { name } = req.body;
+    if (!name || name.trim() === "") {
+        return res.status(400).send("Name is required.");
+    };
 
-    const { name, hp, attack, defense, speed, height, weight } = req.body;
-    const [pokemonCreate, create] = await Pokemon.findOrCreate({
-      where: { name: name }, 
-      defaults: {
-        hp,
-        attack,
-        defense,
-        speed,
-        height,
-        weight 
-      }
+    let types = ["unknown"];
+    if (!type1 && !type2) {
+      types = ["unknown"];
+    } else if (type1 && !type2) {
+      types = [type1];
+    } else if (type2 && !type1) {
+      types = [type2];
+    } else {
+      types = [type1, type2];
+    }
+
+    const getApi = await getData();
+    const filterName = getApi.filter((r) => r.name.toLowerCase() === name.toLowerCase());
+    if (filterName.length) return res.status(400).json({ msg: 'Pokemon ya existe' });
+    const [newPokemon, creado] = await Pokemon.findOrCreate({
+        where: { name: name },
+        defaults: { hp, attack, defense, speed, height, weight,image}
+
     });
+    let assignTypes = await Promise.all(
+        types.map((type) => Type.findOne({ where: { name: type } }))
+      );
+      newPokemon.setTypes(assignTypes)
+    if (creado) return res.json({ msg: "Pokemon creado" })
+    else return res.status(400).json({ msg: "pokemon ya existe" })
 
-    if(create) res.status(200).send("Pokemon created")
-
-    else res.status(400).send("Pokemon already exists")
-  });
-
-
+})
 
 
 module.exports = router;
