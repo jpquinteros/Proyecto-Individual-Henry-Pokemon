@@ -14,18 +14,18 @@ export function Nav ({types, setOrder, setCurrentPage}) {
         //e.preventDefault();
         dispatch(orderAlphabetically(e.target.value));
         setCurrentPage(1);
-        setOrder(`Ordenado by ${e.target.value}`)
+        setOrder(`Ordered by ${e.target.value}`)
     }
 
     function handleOrderByPower(e){
         //e.preventDefault();
         dispatch(orderByAttack(e.target.value));
         setCurrentPage(1);
-        setOrder(`Ordenado by ${e.target.value}`)
+        setOrder(`Ordered by ${e.target.value}`)
     }
 
      function handleFilterType (e){
-        //e.preventDefault();
+        e.preventDefault();
         dispatch(filterByType(e.target.value));
        
         setCurrentPage(1);
@@ -55,10 +55,10 @@ export function Nav ({types, setOrder, setCurrentPage}) {
         </select>
         
         <select className='filterType' onChange={(e) => handleFilterType(e)}>
-            <option className='option0' value="All">Type Filter</option>
+            <option className='option0' value="All">All Types</option>
             {
-                types?.map( pt => {
-                    return <option className='option' value={pt.name} key={pt.id}>{pt.name}</option>
+                types?.map( e => {
+                    return <option className='option' value={e.name} key={e.id}>{e.name}</option>
                 })
             }
         </select>
@@ -84,7 +84,7 @@ export function Nav ({types, setOrder, setCurrentPage}) {
       </button>
       </div>
     
-<SearchBar />
+<SearchBar setCurrentPage = {setCurrentPage} />
        
     </div>
     

@@ -9,7 +9,7 @@ router.get('/', async (req,res)=>{
         const types = await Type.findAll()
         if(!types.length){
             const pokeApi = await axios.get('https://pokeapi.co/api/v2/type')
-            gettingTypes = pokeApi.data.results.map((t)=>{
+            const gettingTypes = pokeApi.data.results.map((t)=>{
                 return {name:t.name}
             })
             await Type.bulkCreate(gettingTypes);

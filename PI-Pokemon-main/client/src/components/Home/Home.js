@@ -30,24 +30,24 @@ export const Home = function () {
   }, [dispatch]);
 
   return (
-    <div className={Style.Homessc} >
+    <div key={Style.Homessc} className={Style.Homessc} >
       <Paginado
+        key = {Paginado}
         currentPage={currentPage}
         pokemonsPerPage={pokemonsPerPage}
         allPokemons={AllPokemons.length}
         paginado={paginado}
       />
-      <Nav types={allTypes} setOrder={setOrder} setCurrentPage={setCurrentPage} />
+      <Nav key={Nav} types={allTypes} setOrder={setOrder} setCurrentPage={setCurrentPage} />
       
-      {currentPokemons.map((pokemon) => {
+      { currentPokemons.map((pokemon) => {
         return (
           <PokemonCard
             key={pokemon.id}
             id={pokemon.id}
             name={pokemon.name}
             image={pokemon.image}
-            type={pokemon.Types}
-
+            type={pokemon.type}
           />
         );
       })}

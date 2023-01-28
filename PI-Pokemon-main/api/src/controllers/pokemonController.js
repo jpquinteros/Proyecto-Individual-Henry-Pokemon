@@ -26,7 +26,7 @@ module.exports = {
         image2: datosPoke.sprites.other["official-artwork"].front_default,
         image3: datosPoke.sprites.other["home"].front_default,
         type: datosPoke.types.map((element) => {
-          return { name: element.type.name };
+          return { name: element.type.name};
         }),
       };
       return objPokemon;
