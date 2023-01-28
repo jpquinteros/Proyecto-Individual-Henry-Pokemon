@@ -16,9 +16,11 @@ export const Home = function () {
   const [order, setOrder] = useState("");
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = AllPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
+  const currentPokemons = AllPokemons?.slice(indexOfFirstPokemon, indexOfLastPokemon)
+  
 
   const paginado = (pageNumber) => { setCurrentPage(pageNumber) }
+
 
   useEffect(() => {
     dispatch(getAllPokemons())

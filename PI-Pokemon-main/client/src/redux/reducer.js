@@ -9,6 +9,7 @@ import {
     ORDER_BY_ATTACK,
     FILTER_BY_TYPE,
     ERROR,
+    getAllPokemons
   } from "./actions";
 
   const initialState = {
@@ -67,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
       let pokeFilter =
         action.payload === "All" ? allTypePokemons : filterTypePokemons;
       if (!pokeFilter.length) {
-        pokeFilter = [{ msg: "there are no Pokemons with that type" }];
+        pokeFilter = [alert('There are no pokemons with that type')];
       }
       console.log(pokeFilter);
       return {

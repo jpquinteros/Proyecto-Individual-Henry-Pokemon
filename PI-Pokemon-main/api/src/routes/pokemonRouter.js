@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
   })
 
   router.post('/', async (req, res) => {
-    const { hp, attack, defense, speed, height, weight,image,type1, type2 } = req.body;
+    const { hp, attack, defense, speed, height, weight, image, type1, type2 } = req.body;
     const { name } = req.body;
     if (!name || name.trim() === "") {
         return res.status(400).send("Name is required.");
@@ -65,18 +65,18 @@ router.get('/', async (req, res) => {
 
     const getApi = await getData();
     const filterName = getApi.filter((r) => r.name.toLowerCase() === name.toLowerCase());
-    if (filterName.length) return res.status(400).json({ msg: 'Pokemon ya existe' });
+    if (filterName.length) return res.status(400).json({ msg: 'Pokemon already exists' });
     const [newPokemon, creado] = await Pokemon.findOrCreate({
         where: { name: name },
-        defaults: { hp, attack, defense, speed, height, weight,image}
+        defaults: { hp, attack, defense, speed, height, weight, image}
 
     });
     let assignTypes = await Promise.all(
         types.map((type) => Type.findOne({ where: { name: type } }))
       );
       newPokemon.setTypes(assignTypes)
-    if (creado) return res.json({ msg: "Pokemon creado" })
-    else return res.status(400).json({ msg: "pokemon ya existe" })
+    if (creado) return res.json({ msg: "Pokemon created" })
+    else return res.status(400).json({ msg: "Pokemon already exists" })
 
 })
 
