@@ -8,7 +8,7 @@ import PokemonDetails from './components/PokemonDetails/PokemonDetails'
 function App() {
   return (
   
-    <div>
+    <div className='body'>
       <Route exact path={'/'}>
         <LandingPage />
       </Route>

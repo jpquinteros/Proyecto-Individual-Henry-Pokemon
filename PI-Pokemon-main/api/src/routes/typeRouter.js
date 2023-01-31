@@ -37,35 +37,4 @@ router.get('/', async (req,res)=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-//{
-
-//     const getPokeTypes = await getType();
-    
-//     const { type } = req.query; //traigo valor type para la query
-    
-//     console.log(getPokeTypes);
-
-//     // if(!type){ //si no hay type traigo la API
-//     //   return res.status(400).json({error: error.message});
-//     // }
-  
-//     if(type){
-//       const queryFilter = getPokeTypes.filter((element) => 
-//         element.results.name.toLowerCase() === type.toLowerCase()
-//       )
-//       return res.status(200).send(queryFilter);
-//     }
-//    });
-
 module.exports = router;

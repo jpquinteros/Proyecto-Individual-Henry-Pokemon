@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.paginado{
+    list-style-type: none;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    cursor: pointer; 
+     
+}
+
+.number{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 2px solid;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    background-color: #C50707;
+    color: white;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+}
+
+.number:hover{
+    background-color: white;
+    color:#C50707;
+}
+
+.number:focus{
+    background-color: black;
+}

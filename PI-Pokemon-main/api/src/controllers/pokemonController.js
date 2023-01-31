@@ -4,13 +4,33 @@ const {Pokemon, Type} = require('../db')
 module.exports = {
   getData: async () => {
     const { data } = await axios(
-      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=150"
+      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151"
     );
     const pokeArray = data.results.map(
       async (element) => await axios(element.url)
     );
     const promisesArray = await axios.all(pokeArray)
     const dataBase = await Pokemon.findAll({include: Type})
+    const mapDb = dataBase.map((d) =>{
+        return{
+          id: d.id,
+          name: d.name,
+          hp: d.hp,
+          attack: d.attack,
+          defense: d.defense,
+          speed: d.speed,
+          height: d.height,
+          weight: d.weight,
+          image: d.image,
+          inDatabase: true,
+          type: d.Types && d.type.map((t) =>{
+            return {
+              name: t.name
+            }
+          })
+        }
+    })
+
     const mapArray = promisesArray.map((element) => {
       const datosPoke = element.data;
       const objPokemon = {

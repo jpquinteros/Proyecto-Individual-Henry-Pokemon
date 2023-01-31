@@ -52,15 +52,15 @@ router.get('/', async (req, res) => {
         return res.status(400).send("Name is required.");
     };
 
-    let types = ["unknown"];
+    let type = ["unknown"];
     if (!type1 && !type2) {
-      types = ["unknown"];
+      type = ["unknown"];
     } else if (type1 && !type2) {
-      types = [type1];
+      type = [type1];
     } else if (type2 && !type1) {
-      types = [type2];
+      type = [type2];
     } else {
-      types = [type1, type2];
+      type = [type1, type2];
     }
 
     const getApi = await getData();
@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
 
     });
     let assignTypes = await Promise.all(
-        types.map((type) => Type.findOne({ where: { name: type } }))
+        type.map((type) => Type.findOne({ where: { name: type } }))
       );
       newPokemon.setTypes(assignTypes)
     if (creado) return res.json({ msg: "Pokemon created" })

@@ -3,6 +3,7 @@ import React, { useState,useEffect } from 'react';
 import { useDispatch,useSelector }from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { getAllPokemons, createPokemon,getTypes } from '../../redux/actions';
+import style from './CreatePokemon.module.css'
 
 const CreateForm=function(){
     const[input,setInput]=useState({
@@ -98,30 +99,19 @@ const CreateForm=function(){
       const handleSubmit = (e) => {
         e.preventDefault();
         if (!error.name) {
-        //   if (pokemons.find((p) => p.name === input.name)) {
-        //     alert("There's already a pokemon with that name");
-        //     setInput({});
-        //     history.push("/home");
-        //   }else{
           dispatch(createPokemon(input));
           setInput({});
           alert("check your new Pokémon");
           history.push("/home");}
-        // } else if (error.name) {
-        //   alert("Error. Please try again");
-        //   setInput({});
-        // }
       };
     
       return (
-        <div>
+        <div className={style.body}>
+          <div className={style.title}><h1>CREATE YOUR OWN POKEMON</h1></div>
           <label hidden={!error.name ? true : false} >
             {error.name}
           </label>
-          <Link to={"/home"}>
-            <img src={null} alt="not found" />
-          </Link>
-          <h1>CREATE YOUR OWN POKEMON</h1>
+          <div className={style.form}>
           <form  onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="name">Name</label>
             <input
@@ -131,6 +121,7 @@ const CreateForm=function(){
               value={input.name}
               placeholder="Name"
             />
+            <br></br>
             <label htmlFor="hp">HP</label>
             <input
               type="number"
@@ -140,6 +131,7 @@ const CreateForm=function(){
               onChange={(e) => handleChange(e)}
               value={input.hp}
             />
+            <br></br>
             <label htmlFor="attack">Attack</label>
             <input
               type="number"
@@ -149,6 +141,7 @@ const CreateForm=function(){
               onChange={(e) => handleChange(e)}
               value={input.attack}
             />
+            <br></br>
             <label htmlFor="defense">Defense</label>
             <input
               type="number"
@@ -158,6 +151,7 @@ const CreateForm=function(){
               onChange={(e) => handleChange(e)}
               value={input.defense}
             />
+            <br></br>
             <label htmlFor="height">Height</label>
             <input
               type="number"
@@ -167,6 +161,7 @@ const CreateForm=function(){
               onChange={(e) => handleChange(e)}
               value={input.height}
             />
+            <br></br>
             <label htmlFor="weight">Weight</label>
             <input
               type="number"
@@ -176,6 +171,7 @@ const CreateForm=function(){
               onChange={(e) => handleChange(e)}
               value={input.weight}
             />
+            <br></br>
             <label htmlFor="speed">Speed</label>
             <input
               type="number"
@@ -185,6 +181,7 @@ const CreateForm=function(){
               onChange={(e) => handleChange(e)}
               value={input.speed}
             />
+            <br></br>
             <label>Select your first type for your Pokemon</label>
             <select onChange={(e) => handleType1(e)}>
               <option hidden>Type 1</option>
@@ -197,6 +194,7 @@ const CreateForm=function(){
                   );
                 })}
             </select>
+            <br></br>
             <label>Select your second type for your Pokemon</label>
             <select onChange={(e) => handleType2(e)}>
               <option hidden>Type2</option>
@@ -211,6 +209,7 @@ const CreateForm=function(){
                     );
                   })}
             </select>
+            <br></br>
             <label htmlFor='image'>Image</label>
             <input type="text" 
             name="image" 
@@ -224,7 +223,14 @@ const CreateForm=function(){
             >
               <span>Create</span>
             </button>
+            <br></br>
           </form>
+          </div>
+          <div className={style.button}>
+            <Link to={"/home"}>
+              <button>Go back home</button>
+            </Link>
+          </div>
         </div>
       );
     };

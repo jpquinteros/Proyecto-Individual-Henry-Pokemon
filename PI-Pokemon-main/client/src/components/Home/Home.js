@@ -5,7 +5,7 @@ import { getAllPokemons, getTypes } from '../../redux/actions';
 import { PokemonCard } from '../PokemonCard/PokemonCard';
 import { Paginado } from '../Pagination/Pagination.js';
 import { Nav } from '../Nav/Nav'
-import Style from './Home.module.css'
+import style from './Home.module.css'
 
 export const Home = function () {
   const dispatch = useDispatch();
@@ -32,27 +32,29 @@ export const Home = function () {
   }, [dispatch]);
 
   return (
-    <div key={Style.Homessc} className={Style.Homessc} >
-      <Paginado
-        key = {Paginado}
-        currentPage={currentPage}
-        pokemonsPerPage={pokemonsPerPage}
-        allPokemons={AllPokemons.length}
-        paginado={paginado}
-      />
+    <div key={style.Homessc} className={style.Homessc} >
       <Nav key={Nav} types={allTypes} setOrder={setOrder} setCurrentPage={setCurrentPage} />
-      
+      <div className={style.cardContainer}>
       { currentPokemons.map((pokemon) => {
         return (
           <PokemonCard
-            key={pokemon.id}
-            id={pokemon.id}
-            name={pokemon.name}
-            image={pokemon.image}
-            type={pokemon.type}
+          key={pokemon.id}
+          id={pokemon.id}
+          name={pokemon.name}
+          image={pokemon.image}
+          type={pokemon.type}
           />
-        );
-      })}
+          );
+        })}
+        </div>
+        <Paginado
+          key = {Paginado}
+          currentPage={currentPage}
+          pokemonsPerPage={pokemonsPerPage}
+          allPokemons={AllPokemons.length}
+          paginado={paginado}
+        />
+      
     </div>
   )
 }

@@ -70,7 +70,6 @@ const rootReducer = (state = initialState, action) => {
       if (!pokeFilter.length) {
         pokeFilter = [alert('There are no pokemons with that type')];
       }
-      console.log(pokeFilter);
       return {
         ...state,
         pokemons: pokeFilter,
@@ -127,9 +126,9 @@ const rootReducer = (state = initialState, action) => {
                   : ` No se ha creado ningun pokemon`,
             };
           }
-        } else {
+        } else if (action.payload === 'api') {
           FilterPokemons = array.filter((pokemon) => {
-            return pokemon.inDatabase === false;
+            return getAllPokemons
           });
         }
         return {

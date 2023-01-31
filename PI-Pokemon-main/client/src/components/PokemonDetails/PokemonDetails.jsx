@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPokemonById } from "../../redux/actions";
+import style from './PokemonDetails.module.css'
+import { Link } from "react-router-dom";
 
 
 export default function PokemonDetails(){
@@ -15,21 +17,32 @@ export default function PokemonDetails(){
     },[dispatch, id])
 
     return(
-        <div key={id} className='details'>
-            <h3>{name}</h3>
-            <h4>HP: {hp}</h4>
-            <h4>Attack: {attack}</h4>
-            <h4>Defense: {defense}</h4>
-            <h4>Speed: {speed}</h4>
-            <h4>Height: {height}</h4>
-            <h4>Weight: {weight}</h4>
-            {type && type.map((e) => {
-            return (
-            <h4 key = {e.name}>Type: {e.name}</h4>
+        <div className={style.body}>
+            <div className={style.img}>
+                <img src={image} alt={name} width="200px" height="250px" />
+            </div>
+            <div className={style.name}><h1>{name}</h1></div>
+        <div key={id} className={style.stats}>
+            <div>
+                <p className={style.p}>ID: {id}</p>
+                <p className={style.p}>HP: {hp}</p>
+                <p className={style.p}>Attack: {attack}</p>
+                <p className={style.p}>Defense: {defense}</p>
+                <p className={style.p}>Speed: {speed}</p>
+                <p className={style.p}>Height: {height}</p>
+                <p className={style.p}>Weight: {weight}</p>
+                {type && type.map((e) => {
+                 return (
+                 <p className={style.p} key = {e.name}>Type: {e.name}</p>
             );
             })}
-            <img src={image} alt={name} width="200px" height="250px" />
-
+            <div>
+                <Link to={'/home'}>
+                <button className={style.button}>Go back home</button>
+                </Link>
+                </div>
+            </div>
+        </div>
         </div>
     )
 }

@@ -1,0 +1,62 @@
+ .stats{
+    position: relative;
+    height: fit-content;
+    max-width: fit-content;
+    border-radius: 4px;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    font-family: monospace;
+    margin-right: 110em;
+    margin-top: 39em;
+    align-self: center;
+    font-family: monospace;
+    
+}
+
+.body{
+    background-image: url('../Imagenes/241-2416633_blank-fire-pokemon-cards-images-blank-pokemon-card.png');
+    background-size: contain;
+    text-align: center;
+    height: fit-content;
+    position: absolute;
+    margin-left: 38em;
+    background-repeat: no-repeat;
+    height: 120vh;
+    width: 100vmax;
+
+}
+
+.img{
+    margin-left: 17em;
+    margin-top: 10em;
+    width: 220px;
+    height: 270px;
+
+}
+
+ .button{
+    position: absolute;
+    margin-top: 1.9em;
+    margin-left: -1em;
+    width: 370px;
+    height: 100px;
+    border-radius:  180px 0 180px 0;
+    font-family: monospace;
+    font-size: 40px;
+
+
+}  
+
+.name{
+    margin-right: 89em;
+    margin-top: -28em;
+    font-family: monospace;
+}
+
+.p{
+    font-family: monospace;
+    font-size: 25px;
+    text-align: center;
+}

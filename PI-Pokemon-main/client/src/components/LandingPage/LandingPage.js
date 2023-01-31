@@ -5,9 +5,14 @@ import style from './LandingPage.module.css';
 export const LandingPage=function(){
     return(
         <div className={style.fondo}>
-            <NavLink to={'/home'}>
-                <h1>Let's get started!</h1>
-            </NavLink>
+           <div className={style.divButton}>
+                <NavLink to={'/home'}>
+                    <button className={style.landingButton}>Let's get started!</button>
+                </NavLink>
+            </div>
+            <div className={style.container}>
+                <h1 className='title'>Welcome to the PokeApi!</h1>
+            </div>
         </div>
     )
 }

@@ -72,7 +72,7 @@ export function Nav ({types, setOrder, setCurrentPage}) {
         <select onChange={(e) => handleCreated(e)}>
           <option hidden>Filter by</option>
           <option value="created">Created</option>
-          <option value="api">API</option>
+          <option value="api">Original</option>
         </select>
         <div>
         <button onClick={() => history.push("/create")}>
